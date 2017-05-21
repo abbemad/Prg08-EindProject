@@ -1,4 +1,64 @@
+body {
+    background-color: lightskyblue;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow:hidden;
+    margin:0px; padding:0px;
+    background-size: cover;
+}
+
+body * {
+    position: absolute;
+    display: block;
+    margin:0px; padding:0px;
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+}
+
+gamebutton {
+    border-radius:5px;
+    padding:10px;
+    background-color: blue;
+    color:white;
+    font-size:22px;
+    cursor: pointer;
+    left:50%; top:30%;
+  
+}
+
+gamebutton:hover {
+    background-color: white;
+    color:blue;
+}
+
+container {
+    background-repeat: no-repeat;
+    width:1600px; height:800px;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    overflow:hidden;
+    background-color: white;
+}
+
+start_character{
+    border: solid red;
+    height: 20px;
+    width: 30px;
+    
+}
+
 plane {
-    background-image: url(../images/plane.png);
-   
+    
+    background-image: url(../images/plane2.png);
+    height: 160px;
+    width: 205px;
+    
+    
+    
+}
+
+enemy {
+    background-image: url(../images/dragon.gif);
+    height: 560px;
+    width: 500px;
+    
 }

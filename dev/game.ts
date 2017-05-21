@@ -1,27 +1,36 @@
+/// <reference path="startScreen.ts"/>
+
 class Game {
+    private screen: any;
 
-  private plane: Plane;
-  private dragon: Dragon;
-  
+    private static instance: Game;
+    private score:number = 0;
+    
 
-    constructor() {
-        let container = document.getElementById("container");
-        this.plane = new Plane(container);
-        this.dragon = new Dragon(container);
-        
+    private constructor() {
 
-        requestAnimationFrame(() => this.gameLoop());
     }
 
-    private gameLoop(){
-        this.plane.draw();
-        this.dragon.draw();
-        requestAnimationFrame(() => this.gameLoop());
+    public static getInstance() {
+        if (!Game.instance) {
+            Game.instance = new Game();
+            Game.instance.getStartScreen();
+        }
+        return Game.instance;
     }
-} 
 
+    public getStartScreen(): void {
+        this.screen = new StartScreen();
+    }
 
-// load
-window.addEventListener("load", function() {
-    let g:Game = new Game();
-});
+    public getPlayScreen(): void {
+        this.screen = new PlayScreen();
+    }
+
+    public gameOver():void{
+        document.getElementById("current_level").remove();  
+          
+        this.screen = new GameOver();
+    }
+
+}
