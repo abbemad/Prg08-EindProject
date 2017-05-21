@@ -2,11 +2,7 @@
  * Plane
  */
 class Plane extends GameObjects {
-    // public div: HTMLElement;
-    // public x: number;
-    // public y: number;
-    // public width: number;
-    // public height: number;
+    public behaviour: Behaviour;
     
     
     constructor(parent: HTMLElement, x: number, y: number) {
@@ -21,9 +17,21 @@ class Plane extends GameObjects {
         // this.x = 50;
         // this.y = 300;
         
+        this.behaviour = new Flying(this);
+        
+        window.addEventListener("keydown", (e: KeyboardEvent) => this.onKeyDown(e));
+        
+        
         
         
     }
+    
+    private onKeyDown(e: KeyboardEvent): void {
+        this.behaviour.onKeyDown(e);
+        
+    }
+      
+  
     
     public draw(): void {
         this.div.style.transform = "translate(" + this.x + "px," + this.y + "px)";

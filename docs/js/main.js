@@ -3,6 +3,20 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
+var Dead = (function () {
+    function Dead(p) {
+        this.plane = p;
+    }
+    Dead.prototype.draw = function () {
+        this.plane.y -= 20;
+        this.plane.x += 4;
+    };
+    Dead.prototype.onKeyDown = function (e) {
+        Game.getInstance().gameOver();
+        this.plane.behaviour = new Flying(this.plane);
+    };
+    return Dead;
+}());
 var Enemy = (function () {
     function Enemy(parent) {
         this.div = document.createElement("enemy");
@@ -16,6 +30,28 @@ var Enemy = (function () {
         this.div.style.transform = "translate(" + this.x + "px," + this.y + "px)";
     };
     return Enemy;
+}());
+var Flying = (function () {
+    function Flying(p) {
+        this.plane = p;
+    }
+    Flying.prototype.draw = function () {
+    };
+    Flying.prototype.onKeyDown = function (e) {
+        console.log("keypressed");
+        if (e.key == 'ArrowUp' || e.key == 'w') {
+            console.log("up pressed");
+            this.plane.y -= 15;
+        }
+        else if (e.key == 'ArrowDown' || e.key == 's') {
+            console.log("down key pressed");
+            this.plane.y += 15;
+        }
+        else if (e.key == 'b') {
+            this.plane.behaviour = new Dead(this.plane);
+        }
+    };
+    return Flying;
 }());
 var ParentScreen = (function () {
     function ParentScreen(name) {
@@ -42,7 +78,7 @@ var StartScreen = (function (_super) {
 }(ParentScreen));
 var Game = (function () {
     function Game() {
-        this.score = 0;
+        this.score = 10;
     }
     Game.getInstance = function () {
         if (!Game.instance) {
@@ -99,8 +135,14 @@ window.addEventListener("load", function () {
 var Plane = (function (_super) {
     __extends(Plane, _super);
     function Plane(parent, x, y) {
+        var _this = this;
         _super.call(this, parent, "plane", x, y, 205, 160);
+        this.behaviour = new Flying(this);
+        window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
     }
+    Plane.prototype.onKeyDown = function (e) {
+        this.behaviour.onKeyDown(e);
+    };
     Plane.prototype.draw = function () {
         this.div.style.transform = "translate(" + this.x + "px," + this.y + "px)";
     };

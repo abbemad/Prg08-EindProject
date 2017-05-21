@@ -4,7 +4,7 @@ class Game {
     private screen: any;
 
     private static instance: Game;
-    private score:number = 0;
+    private score:number = 10;
     
 
     private constructor() {
