@@ -16,6 +16,7 @@ class GameObjects {
         this.width = width;
         this.height = heigth;
         
+        //name wordt meegeven in de super zodat deze regel niet constant wordt herhaald
         this.div = document.createElement(name);
         parent.appendChild(this.div);
     }

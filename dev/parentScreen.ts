@@ -1,3 +1,4 @@
+//abstracte class omdat het in de opdracht stond 
 abstract class ParentScreen {
     protected div: HTMLElement;
     private container: HTMLElement;

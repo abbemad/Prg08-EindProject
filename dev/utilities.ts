@@ -1,3 +1,4 @@
+//functie die iets checkt of het wat raakt.
 class Utilities {
     public static checkPlayerColission(plane: Plane, enemy: Enemy): boolean {
         return (plane.x < enemy.x + enemy.width &&

@@ -53,13 +53,6 @@ container {
 }
 
 
-start_character{
-    border: solid red;
-    height: 20px;
-    width: 30px;
-    
-}
-
 plane {
     
     background-image: url(../images/plane2.png);
