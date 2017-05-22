@@ -23,13 +23,25 @@ var Enemy = (function () {
         parent.appendChild(this.div);
         this.width = 120;
         this.height = 80;
-        this.x = 1100;
+        this.x = 700;
         this.y = 300;
     }
     Enemy.prototype.draw = function () {
         this.div.style.transform = "translate(" + this.x + "px," + this.y + "px)";
     };
     return Enemy;
+}());
+var EngineFire = (function () {
+    function EngineFire(parent) {
+        this.div = document.createElement("engineFire");
+        parent.appendChild(this.div);
+        this.x = 0;
+        this.y = 0;
+    }
+    EngineFire.prototype.draw = function () {
+        this.div.style.transform = "translate(" + this.x + "px, " + this.y + "px)";
+    };
+    return EngineFire;
 }());
 var Flying = (function () {
     function Flying(p) {
@@ -65,7 +77,7 @@ var StartScreen = (function (_super) {
     __extends(StartScreen, _super);
     function StartScreen() {
         _super.call(this, 'start');
-        var btn = document.createElement("gamebutton");
+        var btn = document.createElement("button");
         this.div.appendChild(btn);
         btn.innerHTML = "START";
         btn.addEventListener("click", this.onStartClick.bind(this));
@@ -117,7 +129,7 @@ var GameOver = (function (_super) {
     __extends(GameOver, _super);
     function GameOver() {
         _super.call(this, 'gameover');
-        var btn = document.createElement("gamebutton");
+        var btn = document.createElement("button");
         this.div.appendChild(btn);
         btn.innerHTML = "HA, TRY AGAIN!";
         btn.addEventListener("click", this.onClick.bind(this));
@@ -139,6 +151,7 @@ var Plane = (function (_super) {
         _super.call(this, parent, "plane", x, y, 205, 160);
         this.behaviour = new Flying(this);
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
+        this.engineFire = new EngineFire(this.div);
     }
     Plane.prototype.onKeyDown = function (e) {
         this.behaviour.onKeyDown(e);

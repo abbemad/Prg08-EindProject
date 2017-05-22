@@ -3,7 +3,7 @@
 class GameOver extends ParentScreen {
     constructor() {
         super('gameover');
-        let btn = document.createElement("gamebutton");
+        let btn = document.createElement("button");
         this.div.appendChild(btn);
         btn.innerHTML = "HA, TRY AGAIN!";
 

@@ -5,7 +5,7 @@ class StartScreen extends ParentScreen {
         super('start');
 
         //Knop om de game te starten
-        let btn = document.createElement("gamebutton");
+        let btn = document.createElement("button");
         this.div.appendChild(btn);
         btn.innerHTML = "START";
 

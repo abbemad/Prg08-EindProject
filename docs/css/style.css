@@ -14,30 +14,44 @@ body * {
     background-repeat: no-repeat;
 }
 
-gamebutton {
-    border-radius:5px;
-    padding:10px;
-    background-color: blue;
-    color:white;
-    font-size:22px;
-    cursor: pointer;
-    left:50%; top:30%;
+
+button {
+  display: inline-block;
+  height: 50px;
+  line-height: 50px;
+  padding-right: 30px;
+  padding-left: 70px;
+  position: relative;
+  background-color:rgb(41,127,184);
+  color:rgb(255,255,255);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+    
+  
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  text-shadow:0px 1px 0px rgba(0,0,0,0.5);
   
 }
 
-gamebutton:hover {
+button:hover {
     background-color: white;
     color:blue;
 }
 
 container {
     background-repeat: no-repeat;
-    width:1600px; height:800px;
+    width:1250px; height:800px;
     left: 50%; top: 50%;
     transform: translate(-50%, -50%);
     overflow:hidden;
-    background-color: white;
+    
+    background-image: url(../images/background.jpg);
 }
+
 
 start_character{
     border: solid red;
@@ -60,5 +74,13 @@ enemy {
     background-image: url(../images/dragon.gif);
     height: 560px;
     width: 500px;
+   
     
+    
+}
+
+engineFire{
+    background-image: url(../images/FireBolt.png);
+    height: 100px;
+    width: 160px;
 }

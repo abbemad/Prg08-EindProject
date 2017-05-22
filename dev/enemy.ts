@@ -18,7 +18,7 @@ class Enemy {
         this.width = 120;
         this.height = 80;
         
-        this.x = 1100;
+        this.x = 700;
         this.y =  300;
         
         

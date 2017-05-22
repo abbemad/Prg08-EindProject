@@ -3,6 +3,7 @@
  */
 class Plane extends GameObjects {
     public behaviour: Behaviour;
+    public engineFire: EngineFire;
     
     
     constructor(parent: HTMLElement, x: number, y: number) {
@@ -21,7 +22,7 @@ class Plane extends GameObjects {
         
         window.addEventListener("keydown", (e: KeyboardEvent) => this.onKeyDown(e));
         
-        
+        this.engineFire = new EngineFire(this.div);
         
         
     }
