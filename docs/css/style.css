@@ -65,6 +65,7 @@ plane {
     background-image: url(../images/plane2.png);
     height: 160px;
     width: 205px;
+    border: solid black;
     
     
     
@@ -72,8 +73,9 @@ plane {
 
 enemy {
     background-image: url(../images/dragon.gif);
-    height: 560px;
-    width: 500px;
+    height: 260px;
+    width: 400px;
+    border: solid black;
    
     
     

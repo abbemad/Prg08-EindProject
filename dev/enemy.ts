@@ -9,23 +9,31 @@ class Enemy {
     public y: number;
     public width: number;
     public height: number;
-    
-    
+
+
     constructor(parent: HTMLElement) {
         this.div = document.createElement("enemy");
         parent.appendChild(this.div);
-        
+
         this.width = 120;
         this.height = 80;
-        
+
         this.x = 700;
-        this.y =  300;
-        
-        
-        
+        this.y = 300;
+
+
+
     }
-    
+
     public draw(): void {
+
+        if (this.x <= 0) {
+            this.x += 5;
+        } if (this.x >= 0) {
+            this.x -= 5;
+        }
+
+
         this.div.style.transform = "translate(" + this.x + "px," + this.y + "px)";
     }
 }

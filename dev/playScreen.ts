@@ -13,7 +13,7 @@ class PlayScreen extends ParentScreen {
 
         this.div.id = "current_level";
         this.plane = new Plane(this.div, 50, 300);
-        this.enemy = new Enemy(this.div, 1100, 300);
+        this.enemy = new Enemy(this.div)
         //this.dragon = new Dragon(this.div, 100, 200);
        // this.dragon2 = new Dragon(this.div, 300, 500);
        
@@ -26,6 +26,11 @@ class PlayScreen extends ParentScreen {
     private gameLoop() {
         this.plane.draw();
         this.enemy.draw();
+        
+        if (Utilities.checkPlayerColission(this.plane, this.enemy)) {
+                console.log("hij raakte mij man")
+                }
+            
        // this.dragon.draw();
         //this.dragon2.draw();
                   

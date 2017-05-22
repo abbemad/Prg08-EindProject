@@ -27,6 +27,12 @@ var Enemy = (function () {
         this.y = 300;
     }
     Enemy.prototype.draw = function () {
+        if (this.x <= 0) {
+            this.x += 5;
+        }
+        if (this.x >= 0) {
+            this.x -= 5;
+        }
         this.div.style.transform = "translate(" + this.x + "px," + this.y + "px)";
     };
     return Enemy;
@@ -168,15 +174,29 @@ var PlayScreen = (function (_super) {
         _super.call(this, "PlayScreen");
         this.div.id = "current_level";
         this.plane = new Plane(this.div, 50, 300);
-        this.enemy = new Enemy(this.div, 1100, 300);
+        this.enemy = new Enemy(this.div);
         requestAnimationFrame(function () { return _this.gameLoop(); });
     }
     PlayScreen.prototype.gameLoop = function () {
         var _this = this;
         this.plane.draw();
         this.enemy.draw();
+        if (Utilities.checkPlayerColission(this.plane, this.enemy)) {
+            console.log("hij raakte mij man");
+        }
         requestAnimationFrame(function () { return _this.gameLoop(); });
     };
     return PlayScreen;
 }(ParentScreen));
+var Utilities = (function () {
+    function Utilities() {
+    }
+    Utilities.checkPlayerColission = function (plane, enemy) {
+        return (plane.x < enemy.x + enemy.width &&
+            plane.x + plane.width > enemy.x &&
+            plane.y < enemy.y + enemy.height &&
+            plane.height + plane.y > enemy.y);
+    };
+    return Utilities;
+}());
 //# sourceMappingURL=main.js.map
