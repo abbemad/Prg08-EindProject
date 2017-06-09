@@ -10,13 +10,7 @@ class Flying implements Behaviour {
 
     }
 
-    /*
-    *Keyboard event function 
-    *ArrowUp plane goes up on the y
-    *ArrowDown plane goes down on the y
-    *Suicide button to activate the dead behaviour
-    *Not yet implemented is the shooting ability
-    */
+    
     onKeyDown(e: KeyboardEvent) {
         console.log("keypressed");
 

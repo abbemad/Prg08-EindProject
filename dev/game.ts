@@ -7,6 +7,7 @@ class Game {
     private score:number = 10;
     
     //vreemde error, heeft geen effect op game
+    // moet private zijn voor singleton, update vs code, of update typescript
     private constructor() {
 
     }

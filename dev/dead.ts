@@ -6,6 +6,8 @@ class Dead implements Behaviour {
 
     constructor(p: Plane) {
         this.plane = p;
+         Game.getInstance().gameOver();
+         this.plane.behaviour = new Flying(this.plane);
     }
 
     //Draw function which makes the plan crash
@@ -24,8 +26,8 @@ class Dead implements Behaviour {
      */
 
     onKeyDown(e: KeyboardEvent) {
-        Game.getInstance().gameOver();
-        this.plane.behaviour = new Flying(this.plane);
+        // Game.getInstance().gameOver();
+        // this.plane.behaviour = new Flying(this.plane);
 
     }
 }

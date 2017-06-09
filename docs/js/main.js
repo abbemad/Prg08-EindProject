@@ -6,14 +6,14 @@ var __extends = (this && this.__extends) || function (d, b) {
 var Dead = (function () {
     function Dead(p) {
         this.plane = p;
+        Game.getInstance().gameOver();
+        this.plane.behaviour = new Flying(this.plane);
     }
     Dead.prototype.draw = function () {
         this.plane.y -= 20;
         this.plane.x += 4;
     };
     Dead.prototype.onKeyDown = function (e) {
-        Game.getInstance().gameOver();
-        this.plane.behaviour = new Flying(this.plane);
     };
     return Dead;
 }());
@@ -21,19 +21,17 @@ var Enemy = (function () {
     function Enemy(parent) {
         this.div = document.createElement("enemy");
         parent.appendChild(this.div);
+        this.y = Math.random() * 800;
         this.width = 120;
         this.height = 80;
-        this.x = 700;
-        this.y = 300;
+        this.x = 1900;
     }
     Enemy.prototype.draw = function () {
-        if (this.x <= 0) {
-            this.x += 5;
+        this.x -= 5;
+        this.div.style.transform = "translate(" + this.x + "px," + this.y + "px) scale(-1,1)";
+        if (this.x == -200) {
+            this.div.remove();
         }
-        if (this.x >= 0) {
-            this.x -= 5;
-        }
-        this.div.style.transform = "translate(" + this.x + "px," + this.y + "px)";
     };
     return Enemy;
 }());
@@ -172,17 +170,32 @@ var PlayScreen = (function (_super) {
     function PlayScreen() {
         var _this = this;
         _super.call(this, "PlayScreen");
+        this.enemies = new Array();
         this.div.id = "current_level";
         this.plane = new Plane(this.div, 50, 300);
-        this.enemy = new Enemy(this.div);
+        setInterval(function () { return _this.createEnemy(); }, 2000);
         requestAnimationFrame(function () { return _this.gameLoop(); });
     }
+    PlayScreen.prototype.createEnemy = function () {
+        console.log("createEnemy wordt aangeroepen");
+        this.enemies.push(new Enemy(this.div));
+    };
     PlayScreen.prototype.gameLoop = function () {
         var _this = this;
         this.plane.draw();
-        this.enemy.draw();
-        if (Utilities.checkPlayerColission(this.plane, this.enemy)) {
-            console.log("hij raakte mij man");
+        for (var _i = 0, _a = this.enemies; _i < _a.length; _i++) {
+            var e = _a[_i];
+            e.draw();
+            if (Utilities.checkPlayerColission(this.plane, e)) {
+                this.plane.behaviour = new Dead(this.plane);
+            }
+            for (var _b = 0, _c = this.enemies; _b < _c.length; _b++) {
+                var e_1 = _c[_b];
+                if (e_1.x == -200) {
+                    this.enemies.splice(0, 1);
+                    console.log(this.enemies);
+                }
+            }
         }
         requestAnimationFrame(function () { return _this.gameLoop(); });
     };
