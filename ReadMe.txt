@@ -50,3 +50,5 @@ Observer:
 Is aanwezig bij plane en dragon.
 
 
+Link voor te spelen:
+https://jaehaerystef.github.io/Prg08-EindProject/
