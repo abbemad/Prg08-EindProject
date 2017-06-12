@@ -1,8 +1,12 @@
-/// <reference path="ParentScreen.ts"/>
+/// <reference path="parentScreen.ts"/>
 
 class GameOver extends ParentScreen {
+    private plane: Plane;
+   
+    public behaviour: Behaviour;
+
     constructor() {
-        super('gameover');
+        super('gameOver');
         let btn = document.createElement("button");
         this.div.appendChild(btn);
         btn.innerHTML = "HA, TRY AGAIN!";
@@ -14,8 +18,8 @@ class GameOver extends ParentScreen {
     
     //onclick fucntie om de huidige div te verwijderen de game dus en een nieuwe te starten
     onClick(): void {
-        console.log("retry");
-        this.div.remove();
-        Game.getInstance().getStartScreen();
+       this.div.remove();
+        //this.plane.behaviour = new Flying(this.plane);
+       Game.getInstance().getPlayScreen();
     }
 }

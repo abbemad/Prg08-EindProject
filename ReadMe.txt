@@ -8,33 +8,45 @@ Instalatie:
 5. Compile (shift control b)
 6. Start je localhost programma en plaats de code daar om het te kunnen draaien
 
+
 Spelen:
-Op dit moment kan je de game starten door op start te klikken
-Dan kom je in de game scherm en kan je op en neer bewegen met het vliegtuig
-De toetsen om omhoog te gaan zijn (w en arrowkeyUp)
-De toesten om omlaag te gaan zijn (s en arrowKeyDown)
-De (b) toets is om de crashen met het vliegtuig en de gameover behaviour te starten
+Ontwijk de draken
+Probeer het einde te halen ;) (Er is geen einde)
+Arrowkeys gebruik je om het vliegtuig te besturen
+Alleen up en down werken
 
 Interface: 
-De interface is te vinden onder behaviour.ts
+Meerdere interfacen gebruikt, voornamlijk behaviour
 
 Static utility method:
-Wanneer draaktje vliegtuig raakt staat er in de console dat hij wordt aangeraakt.
-Je kan het zelf testen als je het vliegtuig omhoog laat gaan of omlaag, zodat de borders elkaar niet meer kruisen.
+Wanneer draaktje vliegtuig raakt ben je dood en is het gameOver
 
 Singleton:
-In game.ts
+Toegevoegd zodat je overal de game kan aanroepen, in mijn geval is het gebruikt om de game te laten beindigen
 
-Satretgy:
-De behaviour, net als de jibby
-flying en dead zijn 2 behaviours
+Strategy:
+De behaviour files, flying en dead
 
 Encapsulation:
-Overal wordt met public private en protected gewerkt
+Er wordt met private, public en protected gewerkt
 
 Composition:
-EngineFire.ts is op de plane.ts geplakt
+EngineFire.ts
 
 Inheritance:
-GameObjects en plane erven van elkaar
+GameObjects.ts
+
+Enumeraties:
+eunumeration.ts wordt gebruikt om de snelheid van de draakjes te controleren, zo kan je de moeilijkheid van de game aanpassen.
+(Om de moeilijkheid van de game toe te passen moet je de difficulty aanpassen in dragon.ts) Het plan is om op het startscherm de mogelijkheid te geven om te kiezen, nu staat hij vast op easy.
+
+Polymorphisme:
+In de playscreen is te zien dat de objecten dragon worden aangemaakt door middel van een array.
+
+Library:
+Er wordt gebruik gemaakt van een animation library die de game dus uitlegt en de playknop aan het begin laat verschuiven.
+
+Observer:
+Is aanwezig bij plane en dragon.
+
 

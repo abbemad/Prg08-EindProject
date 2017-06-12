@@ -2,5 +2,6 @@
 interface Behaviour {
     plane: Plane;
     onKeyDown(e: KeyboardEvent): void;
-    draw(): void
+    draw(): void;
+    
 }
