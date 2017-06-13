@@ -10,15 +10,9 @@ class Dead implements Behaviour {
         //document.getElementById("current_level").remove();
         this.plane.behaviour = new Flying(this.plane);
     }
-
-  
-    draw() {
-
-    }
+    draw() {    }
 
     onKeyDown(e: KeyboardEvent) {
-        console.log("keypressed");
-
-
+        // console.log("keypressed");
     }
 }

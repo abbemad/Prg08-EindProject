@@ -36,6 +36,7 @@ class PlayScreen extends ParentScreen {
 
     }
 
+//functie gameover zorg voor nieuwe behaviour, gameover interval van createEnemy clearen
     private GameOver(): void {
         clearInterval(this.intervalID);
         console.log("game Over");
@@ -64,6 +65,8 @@ class PlayScreen extends ParentScreen {
 
             }
         }
+
+        //when hitDragon true wordt doe   . . . 
 
         if (hitDragon) {
             console.log("hit bitch");

@@ -106,10 +106,8 @@ var Dead = (function () {
         Game.getInstance().gameOver();
         this.plane.behaviour = new Flying(this.plane);
     }
-    Dead.prototype.draw = function () {
-    };
+    Dead.prototype.draw = function () { };
     Dead.prototype.onKeyDown = function (e) {
-        console.log("keypressed");
     };
     return Dead;
 }());

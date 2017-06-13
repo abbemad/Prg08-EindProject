@@ -13,8 +13,18 @@ window.onload = function() {
     count = 0,
     tween;
 
+/**
+ * Roep tweenmox aan
+ * Gebruik element box
+ * Repeat de functie 8 keer
+ * Yoyo voor herhaling
+ * Roep onRpeat functie aan wat er moet gebeuren bij de repeats
+ * Kleine delay op alles zodat het niet te snel gaat
+ * easing tween
+ */
 tween = TweenMax.to(box, 2, {repeat:8, yoyo:true, onRepeat:onRepeat, repeatDelay:0.5, ease:Linear.easeNone});
 
+//Libary wat er gedaan moet worden bij elke counter
 function onRepeat() {
   count++;
   if (count == 1) {
@@ -57,8 +67,7 @@ class StartScreen extends ParentScreen {
 
          //Knop om de game te starten
         let btn = document.getElementById("logo");
-        //this.div.appendChild(btn);
-        //btn.innerHTML = "START";
+     
 
 
         //Een event listener zodat wanneer op de knop wordt geklikt de onstart functie wordt aangeroepen.
@@ -69,6 +78,7 @@ class StartScreen extends ParentScreen {
     //Functie die de huidige div verwijderd, zodat de playScreen er kan worden neergezet.
     onStartClick(): void {
         this.div.remove();
+        //Div met library wordt verwijderd zodat het niet in de game blijft staan
         document.getElementById("demo").remove();
         //document.getElementById("box").remove();
         Game.getInstance().getPlayScreen();

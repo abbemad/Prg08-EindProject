@@ -18,17 +18,17 @@ class Game {
 
         return Game.instance;
     }
-
+//Get startScreen
     public getStartScreen(): void {
         this.screen = new StartScreen();
 
     }
-
+//Get playscreen
     public getPlayScreen(): void {
         this.screen = new PlayScreen();
 
     }
-
+//Game over, verwijderd current playfield en start game over scherm
     public gameOver(): void {
        document.getElementById("current_level").remove();
         this.screen = new GameOver();
