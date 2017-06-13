@@ -137,3 +137,18 @@ engineFire{
     height: 100px;
     width: 160px;
 }
+
+cloud {
+    background-image: url(../images/cloud.png);
+    width:150px; height: 57px;
+   
+}
+
+bat {
+background-image: url(../images/bat.gif);
+    height: 350px;
+    width: 350px;
+    /*border: solid black;*/
+    
+      background-position: center;
+}

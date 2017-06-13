@@ -104,7 +104,6 @@ var Dead = (function () {
     function Dead(p) {
         this.plane = p;
         Game.getInstance().gameOver();
-        document.getElementById("current_level").remove();
         this.plane.behaviour = new Flying(this.plane);
     }
     Dead.prototype.draw = function () {
@@ -145,6 +144,59 @@ var GameObjects = (function () {
     };
     return GameObjects;
 }());
+var Enemy = (function (_super) {
+    __extends(Enemy, _super);
+    function Enemy(parent, tag, x, y, width, height) {
+        _super.call(this, parent, tag, x, y, 200, 200);
+    }
+    return Enemy;
+}(GameObjects));
+var Bat = (function (_super) {
+    __extends(Bat, _super);
+    function Bat(parent, x, y, s) {
+        _super.call(this, parent, "bat", x, y, 205, 160);
+        s.subscribe(this);
+        this.counter = 0;
+        this.difficulty = 0;
+    }
+    Bat.prototype.notify = function () {
+        this.counter++;
+        this.voiceLines();
+    };
+    Bat.prototype.Enum = function () {
+        if (this.difficulty == 0) {
+            var v = Enumeration.HARD;
+            this.x -= v;
+        }
+        if (this.difficulty == 1) {
+            var v = Enumeration.NORMAL;
+            this.x -= v;
+        }
+        if (this.difficulty == 2) {
+            var v = Enumeration.EASY;
+            this.x -= v;
+        }
+    };
+    Bat.prototype.voiceLines = function () {
+        if (this.counter == 1) {
+            console.log("Nice score");
+        }
+        if (this.counter == 2) {
+            console.log("Just Keep flying man");
+        }
+        if (this.counter == 3) {
+            console.log("Hmm yes to the stars");
+        }
+    };
+    Bat.prototype.draw = function () {
+        this.Enum();
+        this.div.style.transform = "translate(" + this.x + "px," + this.y + "px)";
+        if (this.x == -200) {
+            this.div.remove();
+        }
+    };
+    return Bat;
+}(Enemy));
 var Dragon = (function (_super) {
     __extends(Dragon, _super);
     function Dragon(parent, x, y, s) {
@@ -158,27 +210,27 @@ var Dragon = (function (_super) {
         this.voiceLines();
     };
     Dragon.prototype.Enum = function () {
-        if (this.counter == 0) {
+        if (this.difficulty == 0) {
             var v = Enumeration.HARD;
             this.x -= v;
         }
-        if (this.counter == 1) {
+        if (this.difficulty == 1) {
             var v = Enumeration.NORMAL;
             this.x -= v;
         }
-        if (this.counter == 2) {
+        if (this.difficulty == 2) {
             var v = Enumeration.EASY;
             this.x -= v;
         }
     };
     Dragon.prototype.voiceLines = function () {
-        if (this.counter == 0) {
+        if (this.counter == 1) {
             console.log("Nice score");
         }
-        if (this.counter == 1) {
+        if (this.counter == 2) {
             console.log("Just Keep flying man");
         }
-        if (this.counter == 2) {
+        if (this.counter == 3) {
             console.log("Hmm yes to the stars");
         }
     };
@@ -190,14 +242,7 @@ var Dragon = (function (_super) {
         }
     };
     return Dragon;
-}(GameObjects));
-var Enemy = (function (_super) {
-    __extends(Enemy, _super);
-    function Enemy(parent, x, y) {
-        _super.call(this, parent, "enemy", x, y, 200, 200);
-    }
-    return Enemy;
-}(GameObjects));
+}(Enemy));
 var EngineFire = (function () {
     function EngineFire(parent) {
         this.div = document.createElement("engineFire");
@@ -278,33 +323,50 @@ var PlayScreen = (function (_super) {
     function PlayScreen() {
         var _this = this;
         _super.call(this, "PlayScreen");
-        this.dragons = new Array();
-        this.gameObjects = new Array();
+        this.enemies = new Array();
         this.div.id = "current_level";
+        this.intervalID = setInterval(function () { return _this.createEnemy(); }, 2800);
         this.plane = new Plane(this.div, 50, 300);
-        setInterval(function () { return _this.createEnemy(); }, 2000);
         requestAnimationFrame(function () { return _this.gameLoop(); });
     }
     PlayScreen.prototype.createEnemy = function () {
-        this.dragons.push(new Dragon(this.div, 1900, Math.random() * 700, this.plane));
+        this.enemies.push(new Dragon(this.div, 1900, Math.random() * 700, this.plane));
+        this.enemies.push(new Bat(this.div, 1900, Math.random() * 700, this.plane));
+    };
+    PlayScreen.prototype.removeFromArray = function (e) {
+        var i = this.enemies.indexOf(e);
+        if (i != -1) {
+            this.enemies.splice(i, 1);
+        }
+    };
+    PlayScreen.prototype.GameOver = function () {
+        clearInterval(this.intervalID);
+        console.log("game Over");
+        this.plane.behaviour = new Dead(this.plane);
     };
     PlayScreen.prototype.gameLoop = function () {
         var _this = this;
         this.plane.draw();
-        for (var _i = 0, _a = this.dragons; _i < _a.length; _i++) {
+        var hitDragon = false;
+        for (var _i = 0, _a = this.enemies; _i < _a.length; _i++) {
             var d = _a[_i];
             d.draw();
             if (d.x == -200) {
-                this.dragons.splice(0, 1);
+                this.removeFromArray(d);
             }
-            if (Utilities.checkPlayerColission(this.plane, d)) {
-                this.plane.behaviour = new Dead(this.plane);
+            else if (Utilities.checkPlayerColission(this.plane, d)) {
+                hitDragon = true;
             }
         }
-        requestAnimationFrame(function () { return _this.gameLoop(); });
+        if (hitDragon) {
+            console.log("hit bitch");
+            this.GameOver();
+        }
+        else {
+            requestAnimationFrame(function () { return _this.gameLoop(); });
+        }
     };
     PlayScreen.prototype.onStartClick = function () {
-        this.div.remove();
         Game.getInstance().getStartScreen();
     };
     return PlayScreen;

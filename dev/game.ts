@@ -30,7 +30,7 @@ class Game {
     }
 
     public gameOver(): void {
-        document.getElementById("current_level").remove();
+       document.getElementById("current_level").remove();
         this.screen = new GameOver();
     }
 }

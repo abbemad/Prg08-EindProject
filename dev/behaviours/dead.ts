@@ -7,7 +7,7 @@ class Dead implements Behaviour {
     constructor(p: Plane) {
         this.plane = p;
         Game.getInstance().gameOver();
-        document.getElementById("current_level").remove();
+        //document.getElementById("current_level").remove();
         this.plane.behaviour = new Flying(this.plane);
     }
 

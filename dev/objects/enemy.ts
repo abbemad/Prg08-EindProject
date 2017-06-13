@@ -1,8 +1,8 @@
 class Enemy extends GameObjects {
+public enum: Enumeration;
 
-
-    constructor(parent: HTMLElement, x: number, y: number) {
-        super(parent, "enemy", x,y,200, 200)
+    constructor(parent: HTMLElement, tag: string, x: number, y: number, width: number, height: number) {
+        super(parent, tag, x,y,200, 200)
         
     }
 }

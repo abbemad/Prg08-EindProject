@@ -5,7 +5,7 @@ class EngineFire {
     private div: HTMLElement;
     public x: number;
     public y: number;
-    
+
 
     constructor(parent: HTMLElement) {
         this.div = document.createElement("engineFire");
@@ -13,7 +13,7 @@ class EngineFire {
 
         this.x = 0;
         this.y = 0;
-        
+
 
 
     }

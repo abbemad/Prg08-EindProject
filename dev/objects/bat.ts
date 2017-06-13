@@ -3,7 +3,7 @@
 
 
 
-class Dragon extends Enemy implements Observer {
+class Bat extends Enemy implements Observer {
     public enum: Enumeration;
     public plane: Plane;
     private counter: number;
@@ -12,11 +12,11 @@ class Dragon extends Enemy implements Observer {
 
 
     constructor(parent: HTMLElement, x: number, y: number, s: Subject) {
-        super(parent, "dragon", x, y, 205, 160);
+        super(parent, "bat", x, y, 205, 160);
         s.subscribe(this);
 
         this.counter = 0;
-        this.difficulty = 2;
+        this.difficulty = 0;
 
     }
     /**
@@ -75,7 +75,7 @@ class Dragon extends Enemy implements Observer {
         this.Enum();
 
         // this.x -= 5;
-        this.div.style.transform = "translate(" + this.x + "px," + this.y + "px) scale(-1,1)";
+        this.div.style.transform = "translate(" + this.x + "px," + this.y + "px)";
 
         if (this.x == -200) {
             this.div.remove();
