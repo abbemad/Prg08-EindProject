@@ -1,15 +1,12 @@
 ///<reference path="gameObjects.ts"/>
 /// <reference path="enemy.ts" />
 
-
-
 class Bat extends Enemy implements Observer {
+    
     public enum: Enumeration;
     public plane: Plane;
     private counter: number;
     private difficulty: number;
-
-
 
     constructor(parent: HTMLElement, x: number, y: number, s: Subject) {
         super(parent, "bat", x, y, 205, 160);
@@ -24,11 +21,11 @@ class Bat extends Enemy implements Observer {
      * verhoogt de counter iedere keer wanneer deze wordt aangeroepen
      * Roep changegame functie aan
     */
+
     public notify() {
         this.counter++;
         this.voiceLines();
     }
-
 
     /**
      * Enum om de moeilijkheid aan te passen
@@ -39,7 +36,6 @@ class Bat extends Enemy implements Observer {
         if (this.difficulty == 0) {
             let v: Enumeration = Enumeration.HARD;
             this.x -= v;
-
         } if (this.difficulty == 1) {
             let v: Enumeration = Enumeration.NORMAL;
             this.x -= v;

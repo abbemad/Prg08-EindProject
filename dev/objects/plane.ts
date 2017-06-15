@@ -38,7 +38,6 @@ class Plane extends GameObjects implements Subject {
             this.sendNotifications();
         } if (this.score == 300) {
             this.sendNotifications();
-
         }
 
     }
@@ -61,7 +60,6 @@ class Plane extends GameObjects implements Subject {
             this.observers.splice(i, 1);
         }
     }
-
 
 
 

@@ -16,16 +16,13 @@ class PlayScreen extends ParentScreen {
 
         this.plane = new Plane(this.div, 50, 300);
 
-
         requestAnimationFrame(() => this.gameLoop());
-
     }
 
     private createEnemy() {
 
         this.enemies.push(new Dragon(this.div, 1900, Math.random() * 700, this.plane));
         this.enemies.push(new Bat(this.div, 1900, Math.random() * 700, this.plane));
-
     }
 
     public removeFromArray(e: Enemy) {
@@ -33,7 +30,6 @@ class PlayScreen extends ParentScreen {
         if (i != -1) {
             this.enemies.splice(i, 1);
         }
-
     }
 
 //functie gameover zorg voor nieuwe behaviour, gameover interval van createEnemy clearen
@@ -56,12 +52,10 @@ class PlayScreen extends ParentScreen {
             if (d.x == -200) {
                this.removeFromArray(d);
 
-
             } else if (Utilities.checkPlayerColission(this.plane, d)) {
                 hitDragon = true;
                 // this.plane.behaviour = new Dead(this.plane);
                 // this.div.remove();
-
 
             }
         }
@@ -76,10 +70,9 @@ class PlayScreen extends ParentScreen {
         }
     }
 
-
     //Functie die de huidige div verwijderd, zodat de playScreen er kan worden neergezet.
     onStartClick(): void {
-
+        
         Game.getInstance().getStartScreen();
     }
 

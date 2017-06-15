@@ -1,8 +1,13 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var Enumeration;
 (function (Enumeration) {
     Enumeration[Enumeration["EASY"] = 5] = "EASY";
@@ -53,9 +58,10 @@ window.onload = function () {
 var StartScreen = (function (_super) {
     __extends(StartScreen, _super);
     function StartScreen() {
-        _super.call(this, 'start');
+        var _this = _super.call(this, 'start') || this;
         var btn = document.getElementById("logo");
-        btn.addEventListener("click", this.onStartClick.bind(this));
+        btn.addEventListener("click", _this.onStartClick.bind(_this));
+        return _this;
     }
     StartScreen.prototype.onStartClick = function () {
         this.div.remove();
@@ -145,17 +151,18 @@ var GameObjects = (function () {
 var Enemy = (function (_super) {
     __extends(Enemy, _super);
     function Enemy(parent, tag, x, y, width, height) {
-        _super.call(this, parent, tag, x, y, 200, 200);
+        return _super.call(this, parent, tag, x, y, 200, 200) || this;
     }
     return Enemy;
 }(GameObjects));
 var Bat = (function (_super) {
     __extends(Bat, _super);
     function Bat(parent, x, y, s) {
-        _super.call(this, parent, "bat", x, y, 205, 160);
-        s.subscribe(this);
-        this.counter = 0;
-        this.difficulty = 0;
+        var _this = _super.call(this, parent, "bat", x, y, 205, 160) || this;
+        s.subscribe(_this);
+        _this.counter = 0;
+        _this.difficulty = 0;
+        return _this;
     }
     Bat.prototype.notify = function () {
         this.counter++;
@@ -198,10 +205,11 @@ var Bat = (function (_super) {
 var Dragon = (function (_super) {
     __extends(Dragon, _super);
     function Dragon(parent, x, y, s) {
-        _super.call(this, parent, "dragon", x, y, 205, 160);
-        s.subscribe(this);
-        this.counter = 0;
-        this.difficulty = 2;
+        var _this = _super.call(this, parent, "dragon", x, y, 205, 160) || this;
+        s.subscribe(_this);
+        _this.counter = 0;
+        _this.difficulty = 2;
+        return _this;
     }
     Dragon.prototype.notify = function () {
         this.counter++;
@@ -256,13 +264,12 @@ var EngineFire = (function () {
 var Plane = (function (_super) {
     __extends(Plane, _super);
     function Plane(parent, x, y) {
-        var _this = this;
-        _super.call(this, parent, "plane", x, y, 205, 160);
-        this.observers = new Array();
-        this.score = 0;
-        this.behaviour = new Flying(this);
+        var _this = _super.call(this, parent, "plane", x, y, 205, 160) || this;
+        _this.observers = new Array();
+        _this.behaviour = new Flying(_this);
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
-        this.engineFire = new EngineFire(this.div);
+        _this.engineFire = new EngineFire(_this.div);
+        return _this;
     }
     Plane.prototype.gameScore = function () {
         var Gscore = document.getElementById("score");
@@ -304,11 +311,12 @@ var Plane = (function (_super) {
 var GameOver = (function (_super) {
     __extends(GameOver, _super);
     function GameOver() {
-        _super.call(this, 'gameOver');
+        var _this = _super.call(this, 'gameOver') || this;
         var btn = document.createElement("button");
-        this.div.appendChild(btn);
+        _this.div.appendChild(btn);
         btn.innerHTML = "HA, TRY AGAIN!";
-        btn.addEventListener("click", this.onClick.bind(this));
+        btn.addEventListener("click", _this.onClick.bind(_this));
+        return _this;
     }
     GameOver.prototype.onClick = function () {
         this.div.remove();
@@ -319,13 +327,13 @@ var GameOver = (function (_super) {
 var PlayScreen = (function (_super) {
     __extends(PlayScreen, _super);
     function PlayScreen() {
-        var _this = this;
-        _super.call(this, "PlayScreen");
-        this.enemies = new Array();
-        this.div.id = "current_level";
-        this.intervalID = setInterval(function () { return _this.createEnemy(); }, 2800);
-        this.plane = new Plane(this.div, 50, 300);
+        var _this = _super.call(this, "PlayScreen") || this;
+        _this.enemies = new Array();
+        _this.div.id = "current_level";
+        _this.intervalID = setInterval(function () { return _this.createEnemy(); }, 2800);
+        _this.plane = new Plane(_this.div, 50, 300);
         requestAnimationFrame(function () { return _this.gameLoop(); });
+        return _this;
     }
     PlayScreen.prototype.createEnemy = function () {
         this.enemies.push(new Dragon(this.div, 1900, Math.random() * 700, this.plane));

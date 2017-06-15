@@ -6,12 +6,9 @@ class Flying implements Behaviour {
     }
 
     draw() {
-
-
+        
     }
-
- 
-    
+   
     onKeyDown(e: KeyboardEvent) {
         console.log("keypressed");
 
